@@ -1,24 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useContext, useState } from "react";
+import { socketConnectionContext } from "./context/SocketConnectionManager";
+import { EEventStrings } from "./types/enums";
 
 function App() {
+  const { socket } = useContext(socketConnectionContext);
+  const [textareaValue, setTextareaValue] = useState("");
+
+  // connect to server
+  useEffect(() => {
+    socket.emit(EEventStrings.clientConnects);
+
+    return () => {
+      socket.emit(EEventStrings.clientDisconnects);
+    };
+  }, [socket]);
+
+  // // receive the test string
+  // useEffect(() => {
+  //   socket.on("TEST", (msg: string) => {
+  //     setTextareaValue(msg);
+  //   });
+  // }, [socket, setTextareaValue]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <textarea value={textareaValue} />
     </div>
   );
 }

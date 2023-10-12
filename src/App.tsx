@@ -8,19 +8,23 @@ function App() {
 
   // connect to server
   useEffect(() => {
-    socket.emit(EEventStrings.clientConnects);
+    // socket.emit("connect"); "connect" is reserved
+    socket.connect();
 
     return () => {
-      socket.emit(EEventStrings.clientDisconnects);
+      // socket.emit("disconnect"); "disconnect" is reserved
+      socket.disconnect();
     };
   }, [socket]);
 
-  // // receive the test string
-  // useEffect(() => {
-  //   socket.on("TEST", (msg: string) => {
-  //     setTextareaValue(msg);
-  //   });
-  // }, [socket, setTextareaValue]);
+  // receive the test string
+  useEffect(() => {
+    socket.on("TEST", (msg: string) => {
+      // setTextareaValue(msg);
+
+      alert(msg);
+    });
+  }, [socket]);
 
   return (
     <div>

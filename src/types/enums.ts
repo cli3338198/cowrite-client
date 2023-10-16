@@ -1,5 +1,5 @@
 // event strings
-export enum EEventStrings {
+export enum EventStrings {
   clientConnects = "connect",
   clilentDisconnects = "disconnect",
 }

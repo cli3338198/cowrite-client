@@ -1,10 +1,10 @@
 import { Socket } from "socket.io-client";
 
-export interface ISocketContext {
+export interface SocketContext {
   socket: Socket;
 }
 
-export interface IClientToServerEvents {
+export interface ClientToServerEvents {
   hello: () => void;
   textChange: (delta: string) => void;
 }

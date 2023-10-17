@@ -35,15 +35,18 @@ export default function TextEditor() {
   }, [quill, socket]);
 
   return (
-    <div
-      style={{
-        width: "500px",
-        height: "500px",
-        border: "2px double green",
-        // TODO: fix this
-      }}
-    >
-      <div ref={quillRef}></div>
-    </div>
+    <>
+      {/* If no user selected, don't show a document or deactivate/grey out the document */}
+      <div
+        style={{
+          width: "500px",
+          height: "500px",
+          border: "2px double green",
+          // TODO: fix this
+        }}
+      >
+        <div ref={quillRef}></div>
+      </div>
+    </>
   );
 }

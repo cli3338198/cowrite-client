@@ -1,5 +1,7 @@
 // event strings
 export enum EventStrings {
-  clientConnects = "connect",
-  clilentDisconnects = "disconnect",
+  connect = "connect",
+  disconnect = "disconnect",
+  getUsers = "getUsers",
+  textChange = "textChange",
 }

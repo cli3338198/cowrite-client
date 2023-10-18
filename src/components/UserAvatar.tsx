@@ -1,7 +1,7 @@
 import { CSSProperties, MouseEvent, useState } from "react";
 import { User } from "../types/interfaces";
 
-function makeDivStyle() {
+function makeDivStyle(isHovered: boolean) {
   return {
     width: "30px",
     height: "30px",
@@ -13,6 +13,7 @@ function makeDivStyle() {
     justifyContent: "center",
     alignItems: "center",
     cursor: "pointer",
+    backgroundColor: `${isHovered ? "grey" : "white"}`,
     // position: "relative",
   } as CSSProperties;
 }
@@ -55,7 +56,7 @@ export default function UserAvatar({
     <>
       <div
         key={id}
-        style={makeDivStyle()}
+        style={makeDivStyle(isHovered)}
         onMouseMove={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >

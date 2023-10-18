@@ -13,7 +13,22 @@ export default function SocketConnectionManager({
 }) {
   useEffect(() => {
     socket.connect();
+
+    const handleUnload = (evt: BeforeUnloadEvent) => {
+      // socket.emit("disconnect-request");
+      localStorage.setItem(socket.id, socket.id);
+      socket.emit("TEST", socket.id);
+      socket.disconnect();
+
+      evt.returnValue = "Are you sure!";
+      evt.preventDefault();
+    };
+
+    // disconnect from server when browser closes
+    window.addEventListener("beforeunload", handleUnload);
+
     return () => {
+      window.removeEventListener("beforeunload", handleUnload);
       socket.disconnect();
     };
   }, []);

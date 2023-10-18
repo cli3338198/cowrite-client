@@ -28,8 +28,16 @@ export default function UserManager({ children }: { children: ReactNode }) {
     });
   }, [socket]);
 
+  // select a user
+  function selectUser(id: User["id"]) {
+    if (users) {
+      // setSelectedUser(users.filter((user) => user.id === id)[0]);
+      socket.emit(EventStrings.selectUser, id);
+    }
+  }
+
   return (
-    <userManagerContext.Provider value={{ selectedUser, users }}>
+    <userManagerContext.Provider value={{ selectedUser, users, selectUser }}>
       {children}
     </userManagerContext.Provider>
   );

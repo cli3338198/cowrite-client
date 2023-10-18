@@ -9,6 +9,7 @@ export default function UsersPane() {
   return (
     <>
       {/* Initially present a list of users */}
+      {/* When the document has loaded, replace the list with all the users with access to the document, grey out the users not currently active! */}
       {isFirstRender && <UsersList />}
     </>
   );

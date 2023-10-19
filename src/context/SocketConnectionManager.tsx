@@ -1,6 +1,7 @@
 import { ReactNode, createContext, useEffect } from "react";
 import { io } from "socket.io-client";
 import { SocketContext } from "../types/interfaces";
+import { EventStrings } from "../types/enums";
 
 const socket = io("http://localhost:5000/"); // TODO: fix this
 
@@ -15,21 +16,19 @@ export default function SocketConnectionManager({
     socket.connect();
 
     const handleUnload = (evt: BeforeUnloadEvent) => {
-      // socket.emit("disconnect-request");
-      localStorage.setItem(socket.id, socket.id);
-      socket.emit("TEST", socket.id);
+      socket.emit(EventStrings.disconnect);
       socket.disconnect();
 
-      evt.returnValue = "Are you sure!";
+      evt.returnValue = "";
       evt.preventDefault();
     };
 
-    // disconnect from server when browser closes
+    // disconnect from server when window closes
     window.addEventListener("beforeunload", handleUnload);
 
     return () => {
       window.removeEventListener("beforeunload", handleUnload);
-      socket.disconnect();
+      socket.disconnect(); // TODO: is this needed?
     };
   }, []);
 
